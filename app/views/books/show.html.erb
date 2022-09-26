@@ -1,0 +1,35 @@
+<!--BOOK詳細ページ-->
+<table class=" table container-md-10 offset-md-1">
+    <thead>
+      <tr>
+        <th class = "col" ><h2>Book detail</h2></th>
+        <th class = "col"></th>
+        <th class = "col"></th>
+        <th class = "col"></th>
+        <th class = "col-md-8"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="row no-gutters border-top border-3">
+
+          <td class="col mx-1 ">
+            <%= link_to user_path(@book.user.id) do%>
+            <%= image_tag @book.user.get_profile_image(100,100)  %>
+            <%= link_to @book.user.name, user_path(@book.user.id) %>
+            <%end%>
+          </td>
+          <td class="col mx-1"><%= link_to @book.title, book_path(@book.id) %></td>
+          <td class="col mx-1"><%= @book.body %></td>
+          <% if @user == current_user %>
+            <td class="col mx-1">
+              <%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-secondary m-2 btn-success" %>
+            </td>
+            <td class="col mx-1">
+              <%= link_to "Destroy", book_path(@book.id),class: "btn btn-secondary m-2 btn-danger", method: :delete, "data-confirm" => "Are you sure?" %>
+            </td>
+          <% else %>
+          <% end %>
+
+      </tr>
+    </tbody>
+  </table>

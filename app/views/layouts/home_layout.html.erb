@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-
     <title>Bookers2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
-    <script src="https://kit.fontawesome.com/9be9dedef9.js" crossorigin="anonymous"></script>
-
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
   </head>
 
    <body class="d-flex flex-column vh-100 ">
-
       <header class="shadow-sm">
         <nav class="navbar navbar-expand-lg navbar-light bg-dark">
           <div class="container">
@@ -26,7 +20,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <ul class="navbar-nav ml-auto m-3 ">
-              <% if user_signed_in? %>
+              <<% if user_signed_in? %>
                 <li class = "m-1 text-white">
                   <%= link_to icon('fas','home', 'Home'), user_path(current_user.id) %>
                 </li>
@@ -60,66 +54,12 @@
         </nav>
       </header>
 
-      <div class = "container">
-        <div class = "row">
-          <% if user_signed_in? %>
-           <div class = "col-md-3">
-              <!--sidebar 中身-->
-              <h2>User Info</h2>
-              <p><%= image_tag @user.get_profile_image(100,100) %></p>
 
-              <table class="table">
-                <tr>
-                  <thead>
-                    <th><p>Name</p></th>
-                    <th><p><%= @user.name %></p></th>
-                  </thead>
-                </tr>
-
-                <tr>
-                  <th><p>Introduction</p></th>
-                  <th><p><%= @user.introduction %></p></th>
-                </tr>
-              </table>
-
-
-              <% if @user == current_user %>
-                <%= link_to icon('fas','user-cog'),edit_user_path(current_user), class: "btn btn-secondary col-6 m-2 btn-info"%>
-              <% else %>
-                <%= link_to icon('fas','user-cog'),edit_user_path(@user.id), class: "btn btn-secondary col-6 m-2 btn-info"%>
-              <%end%>
-
-
-              <h2>New book</h2>
-              <% if @book.errors.any? %>
-                <%= @book.errors.count %>件のエラーが発生しました
-                <ul>
-                  <% @book.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
-                  <% end %>
-                </ul>
-              <% end %>
-              <%= form_with model: Book.new do |f| %>
-
-                <h4>Title</h4>
-                <%= f.text_field :title %>
-
-                <h4>Opinion</h4>
-                <%= f.text_area :body %>
-                <br>
-                <%= f.submit 'Create Book', class: "btn btn-success" %>
-              <% end %>
-
-
-            </div>
-          <% else %>
-          <% end %>
-
-            <main class="col-md-8 offset-md-1">
-              <p class="notice"><%= notice %></p>
-              <%= yield %>
-            </main>
-        </div>
+      <div class = "row">
+          <main class="col-md-8 offset-md-1">
+            <p class="notice"><%= notice %></p>
+          <%= yield %>
+          </main>
       </div>
 
 
